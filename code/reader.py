@@ -64,7 +64,7 @@ class Reader(threading.Thread):
         
         dim_feat = config.get("dim_feat")
         num_frame = config.get("num_frame")
-        batch_size = config.get("batch_size")
+        self.batch_size = batch_size = config.get("batch_size")
         data_flow = self.data_flow
         
         while self.running:

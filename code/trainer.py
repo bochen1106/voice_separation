@@ -97,7 +97,8 @@ class Trainer(object):
             
             loss = []
             n_sample = len(data.data_flow)
-            batch_per_reader = n_sample / data.batch_size
+#            batch_per_reader = n_sample / data.batch_size
+            batch_size = data.batch_size
             for idx_batch in range(batch_per_reader):
                 data, label, names = data.iterate_batch()
                 loss_eval = model.test_on_batch(x=[data], y=[label])
@@ -128,7 +129,7 @@ class Trainer(object):
         num_iter_per_epoch = (n_sample // batch_size) + 1
         num_iter_max = num_epoch * num_iter_per_epoch
         valid_freq = max(5, num_iter_per_epoch//5)
-        disp_freq = max(5, num_iter_per_epoch//25)
+        disp_freq = max(2, num_iter_per_epoch//25)
         
         logger.log("--------------------------------------------------")
         logger.log("training condition:")
@@ -153,6 +154,7 @@ class Trainer(object):
                 
                 data, label, names = data_train.iterate_batch()
                 loss = model.train_on_batch(x=[data], y=[label])
+                loss = np.sqrt(loss / ((data.shape[1] * 257) ** 2))
                 loss_train_hist.append(loss)
                 loss_train_hist_ave.append(np.mean(loss_train_hist))
                 
