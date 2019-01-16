@@ -164,7 +164,7 @@ class Trainer(object):
                 
                 if np.mod(n_iter, valid_freq) == 0:
                     logger.log("computing loss on valid data ...")
-                    loss_valid = eval_loss(model=model, data=data_valid)
+                    loss_valid = eval_loss(model=model, data_valid=data_valid)
                     loss_valid_hist.append(loss_valid)
                     logger.log("current valid loss: %.4f (best: %.4f)" % (loss_valid, loss_valid_best))
                     
