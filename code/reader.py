@@ -81,7 +81,7 @@ class Reader(threading.Thread):
                     # take the rest data, shuffle the flow
                     print "finish the current epoch, take the rest data"
                     idx_batch = data_flow[self.idx_flow:]
-                    self.rng.shufffle(data_flow)
+                    self.rng.shuffle(data_flow)
                     self.idx_flow = 0
                     
                 else:
