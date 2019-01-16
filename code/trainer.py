@@ -95,14 +95,17 @@ class Trainer(object):
         
         def eval_loss(model, data_valid):
             
-            loss = []
+            loss_hist = []
 #            n_sample = len(data.data_flow)
 #            batch_per_reader = n_sample / data.batch_size
             batch_size = data_valid.batch_size
             for idx_batch in range(batch_size):
+                print "%d of %d" % (idx_batch, batch_size)
                 data, label, names = data_valid.iterate_batch()
-                loss_eval = model.test_on_batch(x=[data], y=[label])
-                loss.append(loss_eval)
+                loss = model.test_on_batch(x=[data], y=[label])
+                loss = np.sqrt(loss / ((data.shape[1] * 257) ** 2))
+                print loss
+                loss_hist.append(loss)
             data.reset()
             return np.mean(loss)
         
@@ -129,6 +132,7 @@ class Trainer(object):
         num_iter_per_epoch = (n_sample // batch_size) + 1
         num_iter_max = num_epoch * num_iter_per_epoch
         valid_freq = max(5, num_iter_per_epoch//5)
+        valid_freq = 2
         disp_freq = max(2, num_iter_per_epoch//25)
         
         logger.log("--------------------------------------------------")
