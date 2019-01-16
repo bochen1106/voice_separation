@@ -96,10 +96,10 @@ class Trainer(object):
         def eval_loss(model, data):
             
             loss = []
-            n_sample = len(data.data_flow)
+#            n_sample = len(data.data_flow)
 #            batch_per_reader = n_sample / data.batch_size
             batch_size = data.batch_size
-            for idx_batch in range(batch_per_reader):
+            for idx_batch in range(batch_size):
                 data, label, names = data.iterate_batch()
                 loss_eval = model.test_on_batch(x=[data], y=[label])
                 loss.append(loss_eval)
