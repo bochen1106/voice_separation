@@ -37,5 +37,6 @@ name, [idx_start, length] = info[idx]
 data = f["X"][idx_start: idx_start+length, ...]
 x = data[None, None, ...]
 x.shape
+y = model.predict(x)
 
 f.close()
