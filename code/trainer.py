@@ -100,11 +100,11 @@ class Trainer(object):
 #            batch_per_reader = n_sample / data.batch_size
             batch_size = data_valid.batch_size
             for idx_batch in range(batch_size):
-                print "%d of %d" % (idx_batch, batch_size)
+#                print "%d of %d" % (idx_batch, batch_size)
                 data, label, names = data_valid.iterate_batch()
                 loss = model.test_on_batch(x=[data], y=[label])
                 loss = np.sqrt(loss / ((data.shape[1] * 257) ** 2))
-                print loss
+#                print loss
                 loss_hist.append(loss)
             data.reset()
             return np.mean(loss)
