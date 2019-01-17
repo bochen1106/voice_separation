@@ -22,10 +22,13 @@ if sys.platform in ["linux", "linux2"]: # on server
 if sys.platform == "darwin":    # on local mac
     path_data = "../../data/DSD100"
 
-path_audio_vocal = os.path.join(path_data, "audio", "vocal")
-path_audio_accom = os.path.join(path_data, "audio", "accom")
-path_audio_mixed = os.path.join(path_data, "audio", "mixed")
-path_feat = os.path.join(path_data, "feat")
+set_idx = "set_002"
+path_set = os.path.join(path_data, set_idx)
+
+path_audio_vocal = os.path.join(path_set, "audio", "vocal")
+path_audio_accom = os.path.join(path_set, "audio", "accom")
+path_audio_mixed = os.path.join(path_set, "audio", "mixed")
+path_feat = os.path.join(path_set, "feat")
 
 #%%
 if not os.path.exists(path_feat):

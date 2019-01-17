@@ -23,8 +23,11 @@ if sys.platform in ["linux", "linux2"]: # on server
 if sys.platform == "darwin":    # on local mac
     path_data = "../../data/DSD100"
 
-path_feat = os.path.join(path_data, "feat")
-path_h5 = os.path.join(path_data, "h5")
+set_idx = "set_002"
+path_set = os.path.join(path_data, set_idx)
+
+path_feat = os.path.join(path_set, "feat")
+path_h5 = os.path.join(path_set, "h5")
 
 #%%
 if not os.path.exists(path_h5):
