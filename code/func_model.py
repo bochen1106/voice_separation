@@ -67,13 +67,14 @@ def affinity_kmeans(Y, V):
 
 def build_dpcl():
     
+    import tensorflow as tf
     num_layer = NUM_LAYER
     dim_hid = DIM_HID
     dim_input = DIM_INPUT
     dim_embed = DIM_EMBED
     
     def l2_norm(inputs):
-        import tensorflow as tf
+        
         return tf.nn.l2_normalize(inputs, -1)
     
     # batch_size * T * dim_input
