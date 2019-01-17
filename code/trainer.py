@@ -106,7 +106,7 @@ class Trainer(object):
                 loss = np.sqrt(loss / ((data.shape[1] * 257) ** 2))
 #                print loss
                 loss_hist.append(loss)
-            data.reset()
+            data_valid.reset()
             return np.mean(loss)
         
         config = self.config
