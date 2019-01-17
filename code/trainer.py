@@ -212,7 +212,8 @@ if __name__ == "__main__":
     
     t = Trainer(config, logger)
     t.build_model()
-    t.load_data()
-    t.run()
+    t.model.save("tmp.h5")
+#    t.load_data()
+#    t.run()
     
 
