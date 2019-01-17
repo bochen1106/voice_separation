@@ -12,7 +12,7 @@ import h5py
 import cPickle as pickle
 
 #%%
-filename_model = "../exp/001/model.h5"
+filename_model = "../exp/001/model_done.h5"
 model = load_model(filename_model)
 
 #%%
@@ -38,5 +38,6 @@ data = f["X"][idx_start: idx_start+length, ...]
 x = data[None, None, ...]
 x.shape
 y = model.predict(x)
+print y.shape
 
 f.close()
