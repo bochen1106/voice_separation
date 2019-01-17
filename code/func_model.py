@@ -13,7 +13,7 @@ from keras.layers import Input, Dense, LSTM, multiply
 from keras.layers import TimeDistributed, Bidirectional
 from keras.optimizers import Adam
 from keras.models import model_from_json
-import tensorflow as tf
+
 import os.path as osp
 import os
 
@@ -74,7 +74,7 @@ def build_dpcl():
     dim_embed = DIM_EMBED
     
     def l2_norm(inputs):
-        
+        import tensorflow as tf
         return tf.nn.l2_normalize(inputs, -1)
     
     # batch_size * T * dim_input
