@@ -435,3 +435,336 @@ _________________________________________________________________
 [2019-01-17 16:43:24]: current valid loss: 0.1573 (best: 0.1559)
 [2019-01-17 16:44:25]: training is done
 [2019-01-17 16:44:25]: ================================================
+[2019-01-17 17:29:39]: ################
+[2019-01-17 17:29:39]: ################
+[2019-01-17 17:29:39]: ################
+[2019-01-17 17:29:39]: ################
+[2019-01-17 17:29:39]: ################
+[2019-01-17 17:29:39]: CONTINUE THE TRAINING
+[2019-01-17 17:29:39]: ################
+[2019-01-17 17:29:39]: ################
+[2019-01-17 17:29:39]: ################
+[2019-01-17 17:29:39]: ################
+[2019-01-17 17:29:39]: ################
+[2019-01-17 17:29:39]: ================================================
+[2019-01-17 17:29:39]: initialize the TRAINER
+[2019-01-17 17:29:39]: ================================================
+[2019-01-17 17:29:39]: build the model
+[2019-01-17 17:29:41]: model summary:
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, None, 257)         0         
+_________________________________________________________________
+bidirectional_1 (Bidirection (None, None, 600)         1339200   
+_________________________________________________________________
+bidirectional_2 (Bidirection (None, None, 600)         2162400   
+_________________________________________________________________
+bidirectional_3 (Bidirection (None, None, 600)         2162400   
+_________________________________________________________________
+bidirectional_4 (Bidirection (None, None, 600)         2162400   
+_________________________________________________________________
+embed_audio (TimeDistributed (None, None, 5140)        3089140   
+_________________________________________________________________
+reshape_1 (Reshape)          (None, None, 257, 20)     0         
+_________________________________________________________________
+reshape_2 (Reshape)          (None, None, 20)          0         
+_________________________________________________________________
+lambda_1 (Lambda)            (None, None, 20)          0         
+_________________________________________________________________
+reshape_3 (Reshape)          (None, None, 257, 20)     0         
+=================================================================
+Total params: 10,915,540
+Trainable params: 10,915,540
+Non-trainable params: 0
+_________________________________________________________________
+[2019-01-17 17:29:41]: finish building the model
+[2019-01-17 17:29:41]: load the data from h5 files
+[2019-01-17 17:29:41]: finish loading train data from: ../../../data_voice_separation/DSD100/h5/train.h5
+[2019-01-17 17:29:41]: total number of train data samples: 1105
+[2019-01-17 17:29:41]: finish loading valid data from: ../../../data_voice_separation/DSD100/h5/valid.h5
+[2019-01-17 17:29:41]: total number of valid data samples: 294
+[2019-01-17 17:29:41]: finish loading test data from: ../../../data_voice_separation/DSD100/h5/valid.h5
+[2019-01-17 17:29:41]: total number of test data samples: 294
+[2019-01-17 17:29:41]: train the model
+[2019-01-17 17:29:41]: --------------------------------------------------
+[2019-01-17 17:29:41]: training condition:
+[2019-01-17 17:29:41]: --------------------------------------------------
+[2019-01-17 17:29:41]: batch size: 32
+[2019-01-17 17:29:41]: interations per epoch: 35
+[2019-01-17 17:29:41]: number of epoch: 10
+[2019-01-17 17:29:41]: max number of interations: 350
+[2019-01-17 17:29:41]: display train loss every 5 interations
+[2019-01-17 17:29:41]: compute valid loss every 10 interations
+[2019-01-17 17:29:41]: --------------------------------------------------
+[2019-01-17 17:36:04]: ################
+[2019-01-17 17:36:04]: ################
+[2019-01-17 17:36:04]: ################
+[2019-01-17 17:36:04]: ################
+[2019-01-17 17:36:04]: ################
+[2019-01-17 17:36:04]: CONTINUE THE TRAINING
+[2019-01-17 17:36:04]: ################
+[2019-01-17 17:36:04]: ################
+[2019-01-17 17:36:04]: ################
+[2019-01-17 17:36:04]: ################
+[2019-01-17 17:36:04]: ################
+[2019-01-17 17:36:04]: ================================================
+[2019-01-17 17:36:04]: initialize the TRAINER
+[2019-01-17 17:36:04]: ================================================
+[2019-01-17 17:36:04]: build the model
+[2019-01-17 17:36:06]: model summary:
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, None, 257)         0         
+_________________________________________________________________
+bidirectional_1 (Bidirection (None, None, 600)         1339200   
+_________________________________________________________________
+bidirectional_2 (Bidirection (None, None, 600)         2162400   
+_________________________________________________________________
+bidirectional_3 (Bidirection (None, None, 600)         2162400   
+_________________________________________________________________
+bidirectional_4 (Bidirection (None, None, 600)         2162400   
+_________________________________________________________________
+embed_audio (TimeDistributed (None, None, 5140)        3089140   
+_________________________________________________________________
+reshape_1 (Reshape)          (None, None, 257, 20)     0         
+_________________________________________________________________
+reshape_2 (Reshape)          (None, None, 20)          0         
+_________________________________________________________________
+lambda_1 (Lambda)            (None, None, 20)          0         
+_________________________________________________________________
+reshape_3 (Reshape)          (None, None, 257, 20)     0         
+=================================================================
+Total params: 10,915,540
+Trainable params: 10,915,540
+Non-trainable params: 0
+_________________________________________________________________
+[2019-01-17 17:36:06]: finish building the model
+[2019-01-17 17:36:06]: load the data from h5 files
+[2019-01-17 17:36:06]: finish loading train data from: ../../../data_voice_separation/DSD100/h5/train.h5
+[2019-01-17 17:36:06]: total number of train data samples: 1105
+[2019-01-17 17:36:06]: finish loading valid data from: ../../../data_voice_separation/DSD100/h5/valid.h5
+[2019-01-17 17:36:06]: total number of valid data samples: 294
+[2019-01-17 17:36:06]: finish loading test data from: ../../../data_voice_separation/DSD100/h5/valid.h5
+[2019-01-17 17:36:06]: total number of test data samples: 294
+[2019-01-17 17:36:06]: train the model
+[2019-01-17 17:36:06]: --------------------------------------------------
+[2019-01-17 17:36:06]: training condition:
+[2019-01-17 17:36:06]: --------------------------------------------------
+[2019-01-17 17:36:06]: batch size: 32
+[2019-01-17 17:36:06]: interations per epoch: 35
+[2019-01-17 17:36:06]: number of epoch: 10
+[2019-01-17 17:36:06]: max number of interations: 350
+[2019-01-17 17:36:06]: display train loss every 5 interations
+[2019-01-17 17:36:06]: compute valid loss every 10 interations
+[2019-01-17 17:36:06]: --------------------------------------------------
+[2019-01-17 17:36:52]: iter: 5 of 350, train loss: 0.1395
+[2019-01-17 17:37:09]: iter: 10 of 350, train loss: 0.1362
+[2019-01-17 17:37:09]: computing loss on valid data ...
+[2019-01-17 17:37:16]: current valid loss: 0.1635 (best: inf)
+[2019-01-17 17:37:16]: saving the best model at iter: 10
+[2019-01-17 17:37:17]: model saved as ../exp/002/model
+[2019-01-17 17:37:34]: iter: 15 of 350, train loss: 0.1349
+[2019-01-17 17:37:51]: iter: 20 of 350, train loss: 0.1358
+[2019-01-17 17:37:51]: computing loss on valid data ...
+[2019-01-17 17:37:58]: current valid loss: 0.1568 (best: 0.1635)
+[2019-01-17 17:37:58]: saving the best model at iter: 20
+[2019-01-17 17:37:58]: model saved as ../exp/002/model
+[2019-01-17 17:38:15]: iter: 25 of 350, train loss: 0.1385
+[2019-01-17 17:38:33]: iter: 30 of 350, train loss: 0.1382
+[2019-01-17 17:38:33]: computing loss on valid data ...
+[2019-01-17 17:38:40]: current valid loss: 0.1577 (best: 0.1568)
+[2019-01-17 17:38:57]: iter: 35 of 350, train loss: 0.1381
+[2019-01-17 17:39:15]: iter: 40 of 350, train loss: 0.1373
+[2019-01-17 17:39:15]: computing loss on valid data ...
+[2019-01-17 17:39:21]: current valid loss: 0.1566 (best: 0.1568)
+[2019-01-17 17:39:21]: saving the best model at iter: 40
+[2019-01-17 17:39:22]: model saved as ../exp/002/model
+[2019-01-17 17:39:39]: iter: 45 of 350, train loss: 0.1380
+[2019-01-17 17:39:57]: model saved as ../exp/002/model_iter0050
+[2019-01-17 17:39:57]: iter: 50 of 350, train loss: 0.1379
+[2019-01-17 17:39:57]: computing loss on valid data ...
+[2019-01-17 17:40:04]: current valid loss: 0.1573 (best: 0.1566)
+[2019-01-17 17:40:22]: iter: 55 of 350, train loss: 0.1380
+[2019-01-17 17:40:40]: iter: 60 of 350, train loss: 0.1383
+[2019-01-17 17:40:40]: computing loss on valid data ...
+[2019-01-17 17:40:47]: current valid loss: 0.1570 (best: 0.1566)
+[2019-01-17 17:41:05]: iter: 65 of 350, train loss: 0.1380
+[2019-01-17 17:41:23]: iter: 70 of 350, train loss: 0.1374
+[2019-01-17 17:41:23]: computing loss on valid data ...
+[2019-01-17 17:41:30]: current valid loss: 0.1571 (best: 0.1566)
+[2019-01-17 17:41:48]: iter: 75 of 350, train loss: 0.1369
+[2019-01-17 17:42:06]: iter: 80 of 350, train loss: 0.1372
+[2019-01-17 17:42:06]: computing loss on valid data ...
+[2019-01-17 17:42:13]: current valid loss: 0.1577 (best: 0.1566)
+[2019-01-17 17:42:31]: iter: 85 of 350, train loss: 0.1372
+[2019-01-17 17:42:49]: iter: 90 of 350, train loss: 0.1370
+[2019-01-17 17:42:49]: computing loss on valid data ...
+[2019-01-17 17:42:56]: current valid loss: 0.1574 (best: 0.1566)
+[2019-01-17 17:43:13]: iter: 95 of 350, train loss: 0.1371
+[2019-01-17 17:43:32]: model saved as ../exp/002/model_iter0100
+[2019-01-17 17:43:32]: iter: 100 of 350, train loss: 0.1371
+[2019-01-17 17:43:32]: computing loss on valid data ...
+[2019-01-17 17:43:39]: current valid loss: 0.1582 (best: 0.1566)
+[2019-01-17 17:43:56]: iter: 105 of 350, train loss: 0.1371
+[2019-01-17 17:44:14]: iter: 110 of 350, train loss: 0.1371
+[2019-01-17 17:44:14]: computing loss on valid data ...
+[2019-01-17 17:44:21]: current valid loss: 0.1565 (best: 0.1566)
+[2019-01-17 17:44:21]: saving the best model at iter: 110
+[2019-01-17 17:44:21]: model saved as ../exp/002/model
+[2019-01-17 17:44:39]: iter: 115 of 350, train loss: 0.1371
+[2019-01-17 17:44:57]: iter: 120 of 350, train loss: 0.1371
+[2019-01-17 17:44:57]: computing loss on valid data ...
+[2019-01-17 17:45:04]: current valid loss: 0.1565 (best: 0.1565)
+[2019-01-17 17:45:22]: iter: 125 of 350, train loss: 0.1372
+[2019-01-17 17:45:40]: iter: 130 of 350, train loss: 0.1373
+[2019-01-17 17:45:40]: computing loss on valid data ...
+[2019-01-17 17:45:47]: current valid loss: 0.1570 (best: 0.1565)
+[2019-01-17 17:46:05]: iter: 135 of 350, train loss: 0.1373
+[2019-01-17 17:46:23]: iter: 140 of 350, train loss: 0.1369
+[2019-01-17 17:46:23]: computing loss on valid data ...
+[2019-01-17 17:46:30]: current valid loss: 0.1556 (best: 0.1565)
+[2019-01-17 17:46:30]: saving the best model at iter: 140
+[2019-01-17 17:46:30]: model saved as ../exp/002/model
+[2019-01-17 17:46:48]: iter: 145 of 350, train loss: 0.1371
+[2019-01-17 17:47:06]: model saved as ../exp/002/model_iter0150
+[2019-01-17 17:47:06]: iter: 150 of 350, train loss: 0.1370
+[2019-01-17 17:47:06]: computing loss on valid data ...
+[2019-01-17 17:47:13]: current valid loss: 0.1568 (best: 0.1556)
+[2019-01-17 17:47:32]: iter: 155 of 350, train loss: 0.1370
+[2019-01-17 17:47:50]: iter: 160 of 350, train loss: 0.1372
+[2019-01-17 17:47:50]: computing loss on valid data ...
+[2019-01-17 17:47:57]: current valid loss: 0.1564 (best: 0.1556)
+[2019-01-17 17:48:15]: iter: 165 of 350, train loss: 0.1371
+[2019-01-17 17:48:33]: iter: 170 of 350, train loss: 0.1371
+[2019-01-17 17:48:33]: computing loss on valid data ...
+[2019-01-17 17:48:40]: current valid loss: 0.1559 (best: 0.1556)
+[2019-01-17 17:48:58]: iter: 175 of 350, train loss: 0.1366
+[2019-01-17 17:49:16]: iter: 180 of 350, train loss: 0.1365
+[2019-01-17 17:49:16]: computing loss on valid data ...
+[2019-01-17 17:49:23]: current valid loss: 0.1582 (best: 0.1556)
+[2019-01-17 17:49:41]: iter: 185 of 350, train loss: 0.1364
+[2019-01-17 17:49:58]: iter: 190 of 350, train loss: 0.1364
+[2019-01-17 17:49:59]: computing loss on valid data ...
+[2019-01-17 17:50:05]: current valid loss: 0.1579 (best: 0.1556)
+[2019-01-17 17:50:23]: iter: 195 of 350, train loss: 0.1363
+[2019-01-17 17:50:42]: model saved as ../exp/002/model_iter0200
+[2019-01-17 17:50:42]: iter: 200 of 350, train loss: 0.1364
+[2019-01-17 17:50:42]: computing loss on valid data ...
+[2019-01-17 17:50:49]: current valid loss: 0.1561 (best: 0.1556)
+[2019-01-17 17:51:07]: iter: 205 of 350, train loss: 0.1366
+[2019-01-17 17:51:25]: iter: 210 of 350, train loss: 0.1364
+[2019-01-17 17:51:25]: computing loss on valid data ...
+[2019-01-17 17:51:32]: current valid loss: 0.1557 (best: 0.1556)
+[2019-01-17 17:51:50]: iter: 215 of 350, train loss: 0.1364
+[2019-01-17 17:52:08]: iter: 220 of 350, train loss: 0.1364
+[2019-01-17 17:52:08]: computing loss on valid data ...
+[2019-01-17 17:52:15]: current valid loss: 0.1584 (best: 0.1556)
+[2019-01-17 17:52:33]: iter: 225 of 350, train loss: 0.1364
+[2019-01-17 17:52:51]: iter: 230 of 350, train loss: 0.1363
+[2019-01-17 17:52:51]: computing loss on valid data ...
+[2019-01-17 17:52:58]: current valid loss: 0.1555 (best: 0.1556)
+[2019-01-17 17:52:58]: saving the best model at iter: 230
+[2019-01-17 17:52:58]: model saved as ../exp/002/model
+[2019-01-17 17:53:16]: iter: 235 of 405, train loss: 0.1364
+[2019-01-17 17:53:34]: iter: 240 of 405, train loss: 0.1364
+[2019-01-17 17:53:34]: computing loss on valid data ...
+[2019-01-17 17:53:41]: current valid loss: 0.1557 (best: 0.1555)
+[2019-01-17 17:53:59]: iter: 245 of 405, train loss: 0.1361
+[2019-01-17 17:54:17]: model saved as ../exp/002/model_iter0250
+[2019-01-17 17:54:17]: iter: 250 of 405, train loss: 0.1362
+[2019-01-17 17:54:17]: computing loss on valid data ...
+[2019-01-17 17:54:25]: current valid loss: 0.1581 (best: 0.1555)
+[2019-01-17 17:54:43]: iter: 255 of 405, train loss: 0.1360
+[2019-01-17 17:55:01]: iter: 260 of 405, train loss: 0.1359
+[2019-01-17 17:55:01]: computing loss on valid data ...
+[2019-01-17 17:55:08]: current valid loss: 0.1561 (best: 0.1555)
+[2019-01-17 17:55:26]: iter: 265 of 405, train loss: 0.1360
+[2019-01-17 17:55:44]: iter: 270 of 405, train loss: 0.1360
+[2019-01-17 17:55:44]: computing loss on valid data ...
+[2019-01-17 17:55:51]: current valid loss: 0.1589 (best: 0.1555)
+[2019-01-17 17:56:09]: iter: 275 of 405, train loss: 0.1359
+[2019-01-17 17:56:27]: iter: 280 of 405, train loss: 0.1358
+[2019-01-17 17:56:27]: computing loss on valid data ...
+[2019-01-17 17:56:34]: current valid loss: 0.1584 (best: 0.1555)
+[2019-01-17 17:56:52]: iter: 285 of 405, train loss: 0.1359
+[2019-01-17 17:57:10]: iter: 290 of 405, train loss: 0.1358
+[2019-01-17 17:57:10]: computing loss on valid data ...
+[2019-01-17 17:57:17]: current valid loss: 0.1553 (best: 0.1555)
+[2019-01-17 17:57:17]: saving the best model at iter: 290
+[2019-01-17 17:57:18]: model saved as ../exp/002/model
+[2019-01-17 17:57:36]: iter: 295 of 465, train loss: 0.1358
+[2019-01-17 17:57:54]: model saved as ../exp/002/model_iter0300
+[2019-01-17 17:57:54]: iter: 300 of 465, train loss: 0.1358
+[2019-01-17 17:57:54]: computing loss on valid data ...
+[2019-01-17 17:58:01]: current valid loss: 0.1564 (best: 0.1553)
+[2019-01-17 17:58:19]: iter: 305 of 465, train loss: 0.1358
+[2019-01-17 17:58:37]: iter: 310 of 465, train loss: 0.1358
+[2019-01-17 17:58:37]: computing loss on valid data ...
+[2019-01-17 17:58:44]: current valid loss: 0.1581 (best: 0.1553)
+[2019-01-17 17:59:02]: iter: 315 of 465, train loss: 0.1356
+[2019-01-17 17:59:20]: iter: 320 of 465, train loss: 0.1356
+[2019-01-17 17:59:20]: computing loss on valid data ...
+[2019-01-17 17:59:27]: current valid loss: 0.1583 (best: 0.1553)
+[2019-01-17 17:59:45]: iter: 325 of 465, train loss: 0.1356
+[2019-01-17 18:00:03]: iter: 330 of 465, train loss: 0.1356
+[2019-01-17 18:00:03]: computing loss on valid data ...
+[2019-01-17 18:00:10]: current valid loss: 0.1572 (best: 0.1553)
+[2019-01-17 18:00:28]: iter: 335 of 465, train loss: 0.1356
+[2019-01-17 18:00:47]: iter: 340 of 465, train loss: 0.1355
+[2019-01-17 18:00:47]: computing loss on valid data ...
+[2019-01-17 18:00:54]: current valid loss: 0.1582 (best: 0.1553)
+[2019-01-17 18:01:12]: iter: 345 of 465, train loss: 0.1353
+[2019-01-17 18:01:30]: model saved as ../exp/002/model_iter0350
+[2019-01-17 18:01:30]: iter: 350 of 465, train loss: 0.1353
+[2019-01-17 18:01:30]: computing loss on valid data ...
+[2019-01-17 18:01:37]: current valid loss: 0.1573 (best: 0.1553)
+[2019-01-17 18:01:55]: iter: 355 of 465, train loss: 0.1353
+[2019-01-17 18:02:13]: iter: 360 of 465, train loss: 0.1352
+[2019-01-17 18:02:13]: computing loss on valid data ...
+[2019-01-17 18:02:20]: current valid loss: 0.1573 (best: 0.1553)
+[2019-01-17 18:02:38]: iter: 365 of 465, train loss: 0.1351
+[2019-01-17 18:02:56]: iter: 370 of 465, train loss: 0.1353
+[2019-01-17 18:02:56]: computing loss on valid data ...
+[2019-01-17 18:03:04]: current valid loss: 0.1565 (best: 0.1553)
+[2019-01-17 18:03:21]: iter: 375 of 465, train loss: 0.1353
+[2019-01-17 18:03:39]: iter: 380 of 465, train loss: 0.1353
+[2019-01-17 18:03:39]: computing loss on valid data ...
+[2019-01-17 18:03:46]: current valid loss: 0.1571 (best: 0.1553)
+[2019-01-17 18:04:05]: iter: 385 of 465, train loss: 0.1350
+[2019-01-17 18:04:23]: iter: 390 of 465, train loss: 0.1350
+[2019-01-17 18:04:23]: computing loss on valid data ...
+[2019-01-17 18:04:30]: current valid loss: 0.1560 (best: 0.1553)
+[2019-01-17 18:04:48]: iter: 395 of 465, train loss: 0.1350
+[2019-01-17 18:05:07]: model saved as ../exp/002/model_iter0400
+[2019-01-17 18:05:07]: iter: 400 of 465, train loss: 0.1350
+[2019-01-17 18:05:07]: computing loss on valid data ...
+[2019-01-17 18:05:13]: current valid loss: 0.1566 (best: 0.1553)
+[2019-01-17 18:05:31]: iter: 405 of 465, train loss: 0.1350
+[2019-01-17 18:05:49]: iter: 410 of 465, train loss: 0.1349
+[2019-01-17 18:05:49]: computing loss on valid data ...
+[2019-01-17 18:05:56]: current valid loss: 0.1577 (best: 0.1553)
+[2019-01-17 18:06:15]: iter: 415 of 465, train loss: 0.1349
+[2019-01-17 18:06:33]: iter: 420 of 465, train loss: 0.1349
+[2019-01-17 18:06:33]: computing loss on valid data ...
+[2019-01-17 18:06:40]: current valid loss: 0.1565 (best: 0.1553)
+[2019-01-17 18:06:58]: iter: 425 of 465, train loss: 0.1348
+[2019-01-17 18:07:16]: iter: 430 of 465, train loss: 0.1348
+[2019-01-17 18:07:16]: computing loss on valid data ...
+[2019-01-17 18:07:23]: current valid loss: 0.1563 (best: 0.1553)
+[2019-01-17 18:07:41]: iter: 435 of 465, train loss: 0.1348
+[2019-01-17 18:07:59]: iter: 440 of 465, train loss: 0.1347
+[2019-01-17 18:07:59]: computing loss on valid data ...
+[2019-01-17 18:08:06]: current valid loss: 0.1584 (best: 0.1553)
+[2019-01-17 18:08:24]: iter: 445 of 465, train loss: 0.1347
+[2019-01-17 18:08:42]: model saved as ../exp/002/model_iter0450
+[2019-01-17 18:08:42]: iter: 450 of 465, train loss: 0.1346
+[2019-01-17 18:08:42]: computing loss on valid data ...
+[2019-01-17 18:08:49]: current valid loss: 0.1573 (best: 0.1553)
+[2019-01-17 18:09:07]: iter: 455 of 465, train loss: 0.1347
+[2019-01-17 18:09:25]: iter: 460 of 465, train loss: 0.1347
+[2019-01-17 18:09:25]: computing loss on valid data ...
+[2019-01-17 18:09:33]: current valid loss: 0.1574 (best: 0.1553)
+[2019-01-17 18:09:47]: training is done
+[2019-01-17 18:09:47]: ================================================
