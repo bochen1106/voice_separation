@@ -100,7 +100,7 @@ class Trainer(object):
 #            batch_per_reader = n_sample / data.batch_size
             batch_size = data_valid.batch_size
             for idx_batch in range(batch_size):
-#                print "%d of %d" % (idx_batch, batch_size)
+                print "%d of %d" % (idx_batch, batch_size)
                 data, label, names = data_valid.iterate_batch()
                 loss = model.test_on_batch(x=[data], y=[label])
                 loss = np.sqrt(loss / ((data.shape[1] * 257) ** 2))
@@ -118,6 +118,7 @@ class Trainer(object):
             os.makedirs(path_exp)
         
         filename_model = os.path.join(path_exp, "model") + ".h5"
+        filename_model = str(filename_model)    # to deal with some bug by Keras
         
         batch_size = config.get("batch_size")
         num_epoch = config.get("num_epoch")
@@ -153,9 +154,8 @@ class Trainer(object):
         loss_valid_hist = []
         n_iter = 1
         
-        filename_model = str(filename_model)
-        print filename_model
-        model.save(filename_model)
+        
+
         
         try:
             while n_iter < num_iter_max:
