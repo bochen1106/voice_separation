@@ -115,7 +115,7 @@ class Trainer(object):
         if not os.path.exists(path_exp):
             os.makedirs(path_exp)
         
-        filename_model = os.path.join(path_exp, "model") + ".h5"
+        filename_model = os.path.join(path_exp, "model")
         filename_model = str(filename_model)    # to deal with some bug by Keras
         
         batch_size = config.get("batch_size")
@@ -177,7 +177,7 @@ class Trainer(object):
                         loss_valid_best = loss_valid
                         num_iter_max = max(num_iter_max, n_iter + num_patience*num_iter_per_epoch)
                         logger.log( "saving the model at iter: %d" % n_iter )
-                        model.save(filename_model)
+                        func_model.save_model(model, filename_model)
                         logger.log( "model saved as %s" % filename_model )
                 n_iter += 1
                 
@@ -201,7 +201,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         exp_idx = sys.argv[1]  
     else:
-        exp_idx = "001"
+        exp_idx = "002"
     
     filename_config = "../config/config_" + exp_idx + ".json"
         
