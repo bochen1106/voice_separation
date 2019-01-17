@@ -153,6 +153,8 @@ class Trainer(object):
         loss_valid_hist = []
         n_iter = 1
         
+        model.save(filename_model)
+        
         try:
             while n_iter < num_iter_max:
                 
@@ -212,8 +214,8 @@ if __name__ == "__main__":
     
     t = Trainer(config, logger)
     t.build_model()
-    t.model.save("tmp.h5")
-#    t.load_data()
-#    t.run()
+#    t.model.save("tmp.h5")
+    t.load_data()
+    t.run()
     
 
