@@ -153,6 +153,7 @@ class Trainer(object):
         loss_valid_hist = []
         n_iter = 1
         
+        print filename_model
         model.save(filename_model)
         
         try:
