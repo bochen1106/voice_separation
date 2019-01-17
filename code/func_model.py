@@ -73,6 +73,7 @@ def build_dpcl():
     dim_embed = DIM_EMBED
     
     def l2_norm(inputs):
+        import tensorflow as tf
         return tf.nn.l2_normalize(inputs, -1)
     
     # batch_size * T * dim_input
