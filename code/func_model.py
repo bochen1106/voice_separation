@@ -110,6 +110,50 @@ def build_dpcl():
 
 
 
+'''
+load the model from disk
+- INPUT
+    - filename: the model file name on disk
+- OUTPUT
+    - model:    the loaded model
+Note:
+The model architecture and parameters should be saved separately
+as json and h5py files
+'''
+def load_model(filename):
+
+    json_file = open(filename + '.json', 'r')
+    my_model_json = json_file.read()
+    json_file.close()
+    model = model_from_json(my_model_json)
+    # load weights into new model
+    model.load_weights(filename + ".h5")
+    return model
+
+'''
+save the model to disk
+- INPUT
+    - model:    the model to be saved
+    - filename: the model file name on disk
+- OUTPUT
+    None (directly saved to disk)
+Note:
+The model architecture and parameters are saved separately
+as json and h5py files
+'''
+
+def save_model(model, filename):
+
+    model_json = model.to_json()
+    if os.path.isfile(filename + ".json"):
+        os.remove(filename + ".json")
+    with open(filename + ".json", 'w') as file_json:
+        file_json.write(model_json)
+
+    if os.path.isfile(filename + ".h5"):
+        os.remove(filename + '.h5')
+    model.save_weights(filename + ".h5")
+
 #%%
 
 if __name__ == "__main__":
