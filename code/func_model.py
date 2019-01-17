@@ -104,6 +104,11 @@ def build_dpcl():
     
     model = Model(inputs=[input_audio], outputs=[embed_audio])
     
+    return model
+
+
+def compile_model(model):
+    
     model.compile(loss=affinity_kmeans, optimizer=Adam(lr=0.001))
     
     return model

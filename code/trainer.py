@@ -85,10 +85,12 @@ class Trainer(object):
         
         if filename_model:
             model = func_model.load_model(filename_model)
+            model = func_model.compile_model(model)
             logger.log("load model from: %s", filename_model)
             
         else:
             model = func_model.build_dpcl()
+            model = func_model.compile_model(model)
             logger.log("build model with random initialization")
             
         logger.log("model summary:")
