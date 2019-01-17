@@ -5,6 +5,15 @@ Created on Wed Jan 16 22:20:25 2019
 
 @author: bochen
 """
+
+import tensorflow as tf
+from keras.backend.tensorflow_backend import set_session
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+set_session(tf.Session(config=config))
+
+
+
 import sys
 import os
 from keras.models import load_model
