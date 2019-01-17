@@ -19,6 +19,7 @@ print "#######################"
 
 SR = 16000
 DUR = 5 # sec
+norm_volume = True
 
 if sys.platform in ["linux", "linux2"]: # on server
     path_data = "../../../data"
@@ -26,8 +27,10 @@ if sys.platform == "darwin":    # on local mac
     path_dataset = "/Volumes/Bochen_Harddrive/dataset/DSD100"
     path_data = "../../data/DSD100"
 
-path_audio_vocal = os.path.join(path_data, "audio", "vocal")
-path_audio_accom = os.path.join(path_data, "audio", "accom")
+set_idx = "set_002"
+path_set = os.path.join(path_data, set_idx)
+path_audio_vocal = os.path.join(path_set, "audio", "vocal")
+path_audio_accom = os.path.join(path_set, "audio", "accom")
 
 #%%
 if not os.path.exists(path_audio_vocal):
@@ -71,16 +74,31 @@ for name in piecenames:
             name_dur = "%03d-%03d" % (idx_sec_start, idx_sec_cur)
             name_out = "%06d"%i_sample + "@" + name[:3] + "@" + name_dur
             
-            data = wav_vocal[idx_sec_start*sr : idx_sec_cur*sr]
-            filename_out = os.path.join(path_audio_vocal, name_out) + ".wav"
-            librosa.output.write_wav(filename_out, data, sr)
+            data_vocal = wav_vocal[idx_sec_start*sr : idx_sec_cur*sr]
+            data_accom = wav_accom[idx_sec_start*sr : idx_sec_cur*sr]
             
-            data = wav_accom[idx_sec_start*sr : idx_sec_cur*sr]
+            if norm_volume:
+                rms_vocal = np.sqrt(np.mean(data_vocal**2))
+                rms_accom = np.sqrt(np.mean(data_accom**2))
+                rms_mean = (rms_vocal + rms_accom) / 2
+                data_vocal = data_vocal / rms_vocal * rms_mean
+                data_accom = data_accom / rms_accom * rms_mean
+            
+            filename_out = os.path.join(path_audio_vocal, name_out) + ".wav"
+            librosa.output.write_wav(filename_out, data_vocal, sr)
+            
             filename_out = os.path.join(path_audio_accom, name_out) + ".wav"
-            librosa.output.write_wav(filename_out, data, sr)
+            librosa.output.write_wav(filename_out, data_accom, sr)
             
             idx_sec_start = idx_sec_cur
     
 
     
+#%%
+filename_log = os.path.join(path_set, "log.txt")
+f = open(filename_log, "w")
+f.write("audio volume scaled between tracks \n")
+f.close()
+
+
 

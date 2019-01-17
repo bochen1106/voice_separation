@@ -77,17 +77,24 @@ class Trainer(object):
         self.data_test = data_test
         
         
-    def build_model(self):
+    def build_model(self, filename_model=None):
         
         config = self.config
         logger = self.logger
         logger.log("build the model")
         
-        model = func_model.build_dpcl()
+        if filename_model:
+            model = func_model.load_model(filename_model)
+            logger.log("load model from: %s", filename_model)
+            
+        else:
+            model = func_model.build_dpcl()
+            logger.log("build model with random initialization")
+            
         logger.log("model summary:")
         model.summary()
         model.summary(print_fn=lambda x: logger.file.write(x + '\n'))
-            
+    
         self.model = model
         logger.log("finish building the model")
         
@@ -132,6 +139,7 @@ class Trainer(object):
         num_iter_max = num_epoch * num_iter_per_epoch
         valid_freq = max(10, num_iter_per_epoch//5)
         disp_freq = max(5, num_iter_per_epoch//25)
+        save_freq = 50
         
         logger.log("--------------------------------------------------")
         logger.log("training condition:")
@@ -163,6 +171,12 @@ class Trainer(object):
                 loss_train_hist.append(loss)
                 loss_train_hist_ave.append(np.mean(loss_train_hist))
                 
+                if np.mod(n_iter, save_freq) == 0:
+                    filename = "%s_iter%04d" % (filename_model, n_iter)
+                    func_model.save_model(model, filename)
+                    logger.log( "model saved as %s" % filename )
+                    
+                
                 if np.mod(n_iter, disp_freq) == 0:
                     logger.log("iter: %d of %d, train loss: %.4f" % 
                                (n_iter, num_iter_max, loss_train_hist_ave[-1]))
@@ -176,9 +190,10 @@ class Trainer(object):
                     if loss_valid < loss_valid_best:
                         loss_valid_best = loss_valid
                         num_iter_max = max(num_iter_max, n_iter + num_patience*num_iter_per_epoch)
-                        logger.log( "saving the model at iter: %d" % n_iter )
+                        logger.log( "saving the best model at iter: %d" % n_iter )
                         func_model.save_model(model, filename_model)
                         logger.log( "model saved as %s" % filename_model )
+                
                 n_iter += 1
                 
         except KeyboardInterrupt:
@@ -209,10 +224,22 @@ if __name__ == "__main__":
     config.set("exp_idx", exp_idx)
     
     filename_log = os.path.join(config.get("path_exp"), exp_idx, "log.txt")
-    logger = Logger(filename_log)
+    logger = Logger(filename_log, append=True)
     
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
+    logger.log("CONTINUE THE TRAINING")
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
+               
     t = Trainer(config, logger)
-    t.build_model()
+    t.build_model("../exp/002/model")
 #    t.model.save("tmp.h5")
     t.load_data()
     t.run()
