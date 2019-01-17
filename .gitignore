@@ -5,6 +5,8 @@
 *.png
 *.ipynb
 observe*
+model*
+log*
 
 
 
