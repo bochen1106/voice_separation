@@ -78,21 +78,46 @@ class Trainer(object):
         self.data_valid = data_valid
         
         
-    def build_model(self, filename_model=None):
+    def build_model(self, filename_pretrain=None):
         
         logger = self.logger
         logger.log("build the model")
         
-        if filename_model:
-            model = func_model.load_model(filename_model)
+        if filename_pretrain:
+            model = func_model.load_model(filename_pretrain)
             model = func_model.compile_model(model)
             logger.log("######################################")
-            logger.log("load model from: %s", filename_model)
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("load model from: %s", filename_pretrain)
             logger.log("######################################")
 
         else:
             model = func_model.build_dpcl()
             model = func_model.compile_model(model)
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            logger.log("######################################")
+            
             logger.log("build model with random initialization")
             
         logger.log("model summary:")
@@ -108,7 +133,7 @@ class Trainer(object):
             
             loss_hist = []
             n_sample = len(data_valid.data_flow)
-            batch_per_reader = n_sample / data_valid.batch_size
+            batch_per_reader = n_sample / batch_size
             for idx_batch in range(batch_per_reader):
                 data, label, names = data_valid.iterate_batch()
                 loss = model.test_on_batch(x=[data], y=[label])
