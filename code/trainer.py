@@ -214,16 +214,7 @@ from util.logger import Logger
 
 if __name__ == "__main__":
     
-    if len(sys.argv) > 1:
-        exp_idx = sys.argv[1]  
-    else:
-        exp_idx = "003"
-    
-    filename_config = "../config/config_" + exp_idx + ".json"
-        
-
-    
-    filename_log = os.path.join(config.get("path_exp"), exp_idx, "log.txt")
+    filename_log = os.path.join(path_exp, "log.txt")
     logger = Logger(filename_log, append=True)
                
     t = Trainer(config, logger)
