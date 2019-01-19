@@ -208,8 +208,8 @@ if __name__ == "__main__":
     logger = Logger(filename_log, append=True)
                
     t = Trainer(logger)
-#    t.build_model("../exp/002/model")
-    t.build_model()
+    t.build_model("../exp/003/model")
+#    t.build_model()
     t.load_data()
     t.run()
     
