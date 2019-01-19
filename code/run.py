@@ -14,34 +14,48 @@ from util import Config
 from util import Logger
 from trainer import Trainer
 
-from config import *
+from set_config import * 
+
+# path
+path_feat = path_feat
+path_h5 = path_h5
+path_exp = path_exp
+path_model = path_model
+path_result = path_result
+
+# parameters for data
+dim_feat = dim_feat
+dim_embed = dim_embed
+num_frame = num_frame
+
+norm_type = norm_type
+seed = seed
+batch_size = batch_size
+
+# parameters for train
+num_epoch = num_epoch
+num_patience = num_patience
+
 #%%
 
 if __name__ == '__main__':
 
-    if len(sys.argv) > 1:
-        exp_idx = sys.argv[1]  
-    else:
-        exp_idx = "003"
+    filename_log = os.path.join(path_exp, "log.txt")
+    logger = Logger(filename_log, append=False)
     
-    filename_config = "../config/config_" + exp_idx + ".json"
-        
-    config = Config(filename_config)
-    config.set("exp_idx", exp_idx)
+    path_codeback = os.path.join(path_exp, "codeback")
+    if not os.path.exists(path_codeback):
+        os.makedirs(path_codeback)
+    os.system("cp *.py %s" % path_codeback)
     
-    filename_log = os.path.join(config.get("path_exp"), exp_idx, "log.txt")
-    logger = Logger(filename_log, append=True)
     
-    t = Trainer(config, logger)
-    t.build_model("../exp/002/model")
-#    t.model.save("tmp.h5")
+    t = Trainer(logger)
+    t.build_model()
     t.load_data()
     t.run()
     
     
-    
     #%%
-    path_exp = 
-    os.makedirs(os.path.join(path_exp, "code_backup"))
+    
     
     
