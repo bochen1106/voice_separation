@@ -134,7 +134,7 @@ class Trainer(object):
         num_iter_max = num_epoch * num_iter_per_epoch
         valid_freq = max(10, num_iter_per_epoch//5)
         disp_freq = max(5, num_iter_per_epoch//25)
-        save_freq = 50
+        save_freq = 100
         
         logger.log("--------------------------------------------------")
         logger.log("training condition:")
@@ -210,7 +210,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         exp_idx = sys.argv[1]  
     else:
-        exp_idx = "002"
+        exp_idx = "003"
     
     filename_config = "../config/config_" + exp_idx + ".json"
         
