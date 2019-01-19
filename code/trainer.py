@@ -99,7 +99,7 @@ class Trainer(object):
             logger.log("######################################")
             logger.log("######################################")
             logger.log("######################################")
-            logger.log("load model from: %s", filename_pretrain)
+            logger.log("load model from: %s" % filename_pretrain)
             logger.log("######################################")
 
         else:
