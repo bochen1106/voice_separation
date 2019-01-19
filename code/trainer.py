@@ -1,7 +1,8 @@
 
 import tensorflow as tf
 from keras.backend.tensorflow_backend import set_session
-config = tf.ConfigProto()
+gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)  # use how much percentage of gpu ram
+config = tf.ConfigProto(gpu_options=gpu_options)
 config.gpu_options.allow_growth = True
 set_session(tf.Session(config=config))
 
@@ -52,7 +53,7 @@ class Trainer(object):
             
         set_idx = config.get("set_idx")
         path_set = os.path.join(path_data, set_idx)
-        path_h5 = os.path.join(path_data, "h5")
+        path_h5 = os.path.join(path_set, "h5")
         
         filename_data = os.path.join(path_h5, "train.h5")
         filename_info = os.path.join(path_h5, "train.pickle")
@@ -65,16 +66,9 @@ class Trainer(object):
         data_valid = Reader(filename_data, filename_info, config=config)
         logger.log("finish loading valid data from: " + filename_data)
         logger.log("total number of valid data samples: %d" % len(data_valid.data_flow))
-
-        filename_data = os.path.join(path_h5, "valid.h5")
-        filename_info = os.path.join(path_h5, "valid.pickle")
-        data_test = Reader(filename_data, filename_info, config=config)
-        logger.log("finish loading test data from: " + filename_data)
-        logger.log("total number of test data samples: %d" % len(data_test.data_flow))
         
         self.data_train = data_train
         self.data_valid = data_valid
-        self.data_test = data_test
         
         
     def build_model(self, filename_model=None):
@@ -133,7 +127,6 @@ class Trainer(object):
         
         data_train = self.data_train
         data_valid = self.data_valid
-        data_test = self.data_test
         model = self.model
         
         n_sample = len(data_train.data_flow)
@@ -203,7 +196,6 @@ class Trainer(object):
             
         data_train.close()
         data_valid.close()
-        data_test.close()
         
         logger.log("training is done")
         logger.log("================================================")

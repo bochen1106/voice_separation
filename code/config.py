@@ -1,0 +1,15 @@
+
+
+path_data = "../../../data"
+set_idx = "set_001"
+dim_feat = 257
+num_frame = 626
+seed_reader = 999
+norm_type = "glob"
+batch_size = 32
+num_epoch = 20
+num_patience = 10
+
+
+
+

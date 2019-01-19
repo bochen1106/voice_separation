@@ -99,7 +99,8 @@ class Reader(threading.Thread):
                 idx_sample = 0  # the data index within each batch
                 for idx in idx_batch:
                     name, [idx_start, length] = self.info[idx]
-                    data_tmp = self.f["X"][idx_start: idx_start+length, ...]
+                    data_tmp = self.f["X"][idx_start: idx_start+length, ...] 
+                    data_tmp = (data_tmp - self.data_mean) / self.data_std
                     label_tmp = self.f["Y"][idx_start: idx_start+length, ...]
                     data[idx_sample, ...] = data_tmp
                     label[idx_sample, ...] = label_tmp
