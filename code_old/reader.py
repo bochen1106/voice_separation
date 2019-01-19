@@ -13,29 +13,24 @@ import sys
 import threading
 from time import sleep
 
+import sys
 print "#######################"
 print "platform: " + sys.platform
 print "#######################"
 
-from set_config import * 
-norm_type = norm_type
-seed = seed
-batch_size = batch_size
-num_frame = num_frame
-dim_feat = dim_feat
-
-
+  
 class Reader(threading.Thread):
     
-    def __init__(self, filename_data, filename_info):
+    def __init__(self, filename_data, filename_info, config=None):
         
         threading.Thread.__init__(self)
         
+        self.config = config
         self.f = f = h5py.File(filename_data)
         self.info = info = pickle.load(open(filename_info, "r"))
         
-#        norm_type = config.get("norm_type")
-#        seed = config.get("seed_reader")
+        norm_type = config.get("norm_type")
+        seed = config.get("seed_reader")
         
         if norm_type == "glob":
             data_mean = np.array(f["mean_glob"])
@@ -66,7 +61,12 @@ class Reader(threading.Thread):
         self.idx_flow = 0
         
     def run(self):
-                
+        
+        config = self.config
+        
+        dim_feat = config.get("dim_feat")
+        num_frame = config.get("num_frame")
+        self.batch_size = batch_size = config.get("batch_size")
         data_flow = self.data_flow
         
         while self.running:
@@ -136,20 +136,21 @@ class Reader(threading.Thread):
         
 if __name__ == "__main__":
     
-#    if sys.platform in ["linux", "linux2"]: # on server
-#        path_data = "../../../data_voice_separation/DSD100"
-#    if sys.platform == "darwin":    # on local mac
-#        path_data = "../../data/DSD100/set_001"
-#        
-#    from util.config import Config
-#    filename_config = "../config/config_001.json"
-#    config = Config(filename_config)
-    path_h5 = path_h5
+    if sys.platform in ["linux", "linux2"]: # on server
+        path_data = "../../../data_voice_separation/DSD100"
+    if sys.platform == "darwin":    # on local mac
+        path_data = "../../data/DSD100"
+        
+    from util.config import Config
     
+    filename_config = "../config/config_001.json"
+    config = Config(filename_config)
+    
+    path_h5 = os.path.join(path_data, "h5")
     filename_data = os.path.join(path_h5, "train.h5")
     filename_info = os.path.join(path_h5, "train.pickle")
 
-    reader = Reader(filename_data, filename_info)
+    reader = Reader(filename_data, filename_info, config)
     
     for i in range(5):
         

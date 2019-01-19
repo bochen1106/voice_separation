@@ -23,35 +23,18 @@ from util import *
 from reader import Reader
 import func_model
 
-from set_config import * 
-
-# path
-path_feat = path_feat
-path_h5 = path_h5
-path_exp = path_exp
-path_model = path_model
-path_result = path_result
-
-# parameters for data
-dim_feat = dim_feat
-dim_embed = dim_embed
-num_frame = num_frame
-
-norm_type = norm_type
-seed = seed
-batch_size = batch_size
-
-# parameters for train
-num_epoch = num_epoch
-num_patience = num_patience
-
 #%%
+import sys
+print "#######################"
+print "platform: " + sys.platform
+print "#######################"
 
 
 class Trainer(object):
     
-    def __init__(self, logger):
+    def __init__(self, config, logger):
         
+        self.config = config
         self.logger = logger
         logger.log("================================================")
         logger.log("initialize the TRAINER")
@@ -59,6 +42,7 @@ class Trainer(object):
         
     def load_data(self):
         
+        config = self.config
         logger = self.logger
         logger.log("load the data from h5 files")
         
@@ -89,16 +73,15 @@ class Trainer(object):
         
     def build_model(self, filename_model=None):
         
+        config = self.config
         logger = self.logger
         logger.log("build the model")
         
         if filename_model:
             model = func_model.load_model(filename_model)
             model = func_model.compile_model(model)
-            logger.log("######################################")
             logger.log("load model from: %s", filename_model)
-            logger.log("######################################")
-
+            
         else:
             model = func_model.build_dpcl()
             model = func_model.compile_model(model)
@@ -127,16 +110,20 @@ class Trainer(object):
             data_valid.reset()
             return np.mean(loss)
         
+        config = self.config
         logger = self.logger
         logger.log("train the model")
         
-        if not os.path.exists(path_model):
-            os.makedirs(path_model)
+        path_exp = os.path.join(config.get("path_exp"), config.get("exp_idx"))
+        if not os.path.exists(path_exp):
+            os.makedirs(path_exp)
         
-        filename_model = os.path.join(path_model, "model_best")
+        filename_model = os.path.join(path_exp, "model")
         filename_model = str(filename_model)    # to deal with some bug by Keras
         
-
+        batch_size = config.get("batch_size")
+        num_epoch = config.get("num_epoch")
+        num_patience = config.get("num_patience")
         
         data_train = self.data_train
         data_valid = self.data_valid
@@ -166,7 +153,10 @@ class Trainer(object):
         loss_valid_best = float("inf")
         loss_valid_hist = []
         n_iter = 1
+        
+        
 
+        
         try:
             while n_iter < num_iter_max:
                 
@@ -177,10 +167,11 @@ class Trainer(object):
                 loss_train_hist_ave.append(np.mean(loss_train_hist))
                 
                 if np.mod(n_iter, save_freq) == 0:
-                    filename_model_cur = os.path.join(path_model, "model_iter%04d" % n_iter)
-                    func_model.save_model(model, filename_model_cur)
-                    logger.log( "model saved as %s" % filename_model_cur )
+                    filename = "%s_iter%04d" % (filename_model, n_iter)
+                    func_model.save_model(model, filename)
+                    logger.log( "model saved as %s" % filename )
                     
+                
                 if np.mod(n_iter, disp_freq) == 0:
                     logger.log("iter: %d of %d, train loss: %.4f" % 
                                (n_iter, num_iter_max, loss_train_hist_ave[-1]))
@@ -210,7 +201,9 @@ class Trainer(object):
         logger.log("================================================")
         
 #%%
+from util.config import Config
 from util.logger import Logger
+
 
 if __name__ == "__main__":
     
@@ -221,13 +214,27 @@ if __name__ == "__main__":
     
     filename_config = "../config/config_" + exp_idx + ".json"
         
-
+    config = Config(filename_config)
+    config.set("exp_idx", exp_idx)
     
     filename_log = os.path.join(config.get("path_exp"), exp_idx, "log.txt")
     logger = Logger(filename_log, append=True)
+    
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
+    logger.log("CONTINUE THE TRAINING")
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
+    logger.log("################")
                
     t = Trainer(config, logger)
     t.build_model("../exp/002/model")
+#    t.model.save("tmp.h5")
     t.load_data()
     t.run()
     
