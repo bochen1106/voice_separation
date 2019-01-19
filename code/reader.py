@@ -43,6 +43,8 @@ class Reader(threading.Thread):
         else:
             data_mean = 0
             data_std = 1
+        self.data_mean = data_mean
+        self.data_std = data_std
         
         self.rng = np.random.RandomState(seed=seed)
         self.data_flow = range(len(info))
