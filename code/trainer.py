@@ -61,25 +61,16 @@ class Trainer(object):
         
         logger = self.logger
         logger.log("load the data from h5 files")
-        
-        if sys.platform in ["linux", "linux2"]: # on server
-            path_data = "../../../data_voice_separation/DSD100"
-        if sys.platform == "darwin":    # on local mac
-            path_data = "../../data/DSD100"
-            
-        set_idx = config.get("set_idx")
-        path_set = os.path.join(path_data, set_idx)
-        path_h5 = os.path.join(path_set, "h5")
-        
+                
         filename_data = os.path.join(path_h5, "train.h5")
         filename_info = os.path.join(path_h5, "train.pickle")
-        data_train = Reader(filename_data, filename_info, config=config)
+        data_train = Reader(filename_data, filename_info)
         logger.log("finish loading train data from: " + filename_data)
         logger.log("total number of train data samples: %d" % len(data_train.data_flow))
         
         filename_data = os.path.join(path_h5, "valid.h5")
         filename_info = os.path.join(path_h5, "valid.pickle")
-        data_valid = Reader(filename_data, filename_info, config=config)
+        data_valid = Reader(filename_data, filename_info)
         logger.log("finish loading valid data from: " + filename_data)
         logger.log("total number of valid data samples: %d" % len(data_valid.data_flow))
         
@@ -122,7 +113,6 @@ class Trainer(object):
                 data, label, names = data_valid.iterate_batch()
                 loss = model.test_on_batch(x=[data], y=[label])
                 loss = np.sqrt(loss / ((data.shape[1] * 257) ** 2))
-#                print loss
                 loss_hist.append(loss)
             data_valid.reset()
             return np.mean(loss)
