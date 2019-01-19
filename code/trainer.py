@@ -1,7 +1,7 @@
 
 import tensorflow as tf
 from keras.backend.tensorflow_backend import set_session
-gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)  # use how much percentage of gpu ram
+gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.8)  # use how much percentage of gpu ram
 config = tf.ConfigProto(gpu_options=gpu_options)
 config.gpu_options.allow_growth = True
 set_session(tf.Session(config=config))
