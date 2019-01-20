@@ -11,7 +11,7 @@ path_set = os.path.join(path_data, set_idx)
 path_feat = os.path.join(path_set, "feat")
 path_h5 = os.path.join(path_set, "h5")
 
-exp_idx = "004"
+exp_idx = "003"
 path_exp = os.path.join("../exp", exp_idx)
 path_model = os.path.join(path_exp, "model")
 path_result = os.path.join(path_exp, "result")
