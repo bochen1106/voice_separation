@@ -198,14 +198,27 @@ class Trainer(object):
         
         logger.log("training is done")
         logger.log("================================================")
+
+'''
+a dumb logger object when input logger is None
+the dumb logger doesn't output any log file to disk
+this is used to prevent overwriting an existing log file
+'''
+class Logger_dumb(object):
+    def __init__(self):
+        pass
+    def log(self, content):
+        print (content)
+        
         
 #%%
 from util.logger import Logger
 
 if __name__ == "__main__":
     
-    filename_log = os.path.join(path_exp, "log.txt")
-    logger = Logger(filename_log, append=True)
+#    filename_log = os.path.join(path_exp, "log.txt")
+#    logger = Logger(filename_log, append=True)
+    logger = Logger_dumb()
                
     t = Trainer(logger)
     t.build_model("../exp/003/model")

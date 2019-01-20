@@ -144,7 +144,6 @@ if __name__ == "__main__":
 #    from util.config import Config
 #    filename_config = "../config/config_001.json"
 #    config = Config(filename_config)
-    path_h5 = path_h5
     
     filename_data = os.path.join(path_h5, "train.h5")
     filename_info = os.path.join(path_h5, "train.pickle")
