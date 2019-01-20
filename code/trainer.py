@@ -212,7 +212,6 @@ class Logger_dumb(object):
         
         
 #%%
-from util.logger import Logger
 
 if __name__ == "__main__":
     
@@ -221,8 +220,8 @@ if __name__ == "__main__":
     logger = Logger_dumb()
                
     t = Trainer(logger)
-    t.build_model("../exp/003/model")
-#    t.build_model()
+#    t.build_model("../exp/003/model")
+    t.build_model()
     t.load_data()
     t.run()
     

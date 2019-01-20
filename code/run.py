@@ -12,7 +12,7 @@ import os
 
 from util import Config
 from util import Logger
-from trainer import Trainer
+
 
 from set_config import * 
 
@@ -48,10 +48,16 @@ if __name__ == '__main__':
         os.makedirs(path_codeback)
     os.system("cp *.py %s" % path_codeback)
     
-    
+    from trainer import Trainer
     t = Trainer(logger)
     t.build_model()
     t.load_data()
+    t.run()
+    
+    from tester import Tester
+    t = Tester(logger)
+    t.load_data()
+    t.load_model()
     t.run()
     
     
