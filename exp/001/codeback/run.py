@@ -59,7 +59,7 @@ if __name__ == '__main__':
     t.load_data()
     t.load_model()
     t.run()
-    t.eval_sdr()
+    
     
     #%%
     

@@ -88,6 +88,10 @@ f.close()
 filename_pickle = os.path.join(path_h5, "train") + ".pickle"
 pickle.dump(info, open(filename_pickle, "w"))
 
+filename_list = os.path.join(path_h5, "names_train.txt")
+with open(filename_list, "w") as f:
+    f.writelines(["%s\n" % item  for item in names_train])
+    
 
 
 #%% valid data
@@ -136,3 +140,9 @@ f.close()
 
 filename_pickle = os.path.join(path_h5, "valid") + ".pickle"
 pickle.dump(info, open(filename_pickle, "w"))
+
+filename_list = os.path.join(path_h5, "names_valid.txt")
+with open(filename_list, "w") as f:
+    f.writelines(["%s\n" % item  for item in names_valid])
+    
+    

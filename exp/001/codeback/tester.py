@@ -22,7 +22,6 @@ import cPickle as pickle
 import librosa
 from sklearn.cluster import KMeans
 from reader import Reader
-import museval
 
 import func_model
 sys.path.append("../../functions")
@@ -32,7 +31,6 @@ import func_data
 from set_config import * 
 
 # path
-path_audio = path_audio
 path_feat = path_feat
 path_h5 = path_h5
 path_exp = path_exp
@@ -40,7 +38,6 @@ path_model = path_model
 path_result = path_result
 
 # parameters for data
-sr = sr
 dim_feat = dim_feat
 dim_embed = dim_embed
 num_frame = num_frame
@@ -64,9 +61,6 @@ class Tester(object):
         logger.log("initialize the TRAINER")
         logger.log("================================================")
     
-    '''
-    load the data and info saved in h5 and pickle files
-    '''
     def load_data(self, data_type="test"):
         
         logger = self.logger
@@ -97,9 +91,7 @@ class Tester(object):
         logger.log("total number of test data samples: %d" % len(info))
         
 
-    '''
-    load the trained model
-    '''
+
     def load_model(self):
         
         logger = self.logger
@@ -110,12 +102,7 @@ class Tester(object):
            
         self.model = model
         logger.log("finish loading the model from %s" % filename_model)        
-    
-    
-    '''
-    test the model and output the separated audio tracks
-    the model input is loaded from the feature path (isolated h5 files)
-    '''
+        
     def run(self):
         
         logger = self.logger
@@ -154,11 +141,6 @@ class Tester(object):
             y = np.reshape(y, newshape=(T, F, -1))  # T * F * 2
             y = y * np.sum(t, axis=-1)[..., None]   # T * F * 2
             mask_pred = y.T     # 2 * F * T
-            
-            s1 = np.sum(mask[0,...] * mask_pred[0,...]) + np.sum(mask[1,...] * mask_pred[1,...])
-            s2 = np.sum(mask[0,...] * mask_pred[1,...]) + np.sum(mask[1,...] * mask_pred[0,...])
-            if s1 < s2:
-                mask_pred = np.flip(mask_pred, axis=0)
   
             filename = os.path.join(path_result, name+"_1.wav")
             wav = func_data.restore_wav(mag, pha, mask_pred[0, ...])
@@ -168,82 +150,10 @@ class Tester(object):
             wav = func_data.restore_wav(mag, pha, mask_pred[1, ...])
             librosa.output.write_wav(filename, wav, 16000)
             
-        logger.log("finish output the separation result audios")
+            self.mask_pred = mask_pred
+            self.mask = mask
     
-    
-    '''
-    evaluate the separation result using SDR
-    output a text list as:
-        
-                    SDR(voice)  SDR(accom)  NSDR(voice) NSDR(accom)
-        sample_1    XXX         XXX         XXX         XXX   
-        sample_2    XXX         XXX         XXX         XXX   
-        ...         ...
-        sample_n    XXX         XXX         XXX         XXX   
-        
-    '''
-    def eval_sdr(self):
-        
-        logger = self.logger
-        logger.log("##########################################")
-        logger.log("evaluate the separation results using SDR")
-        
-        sr = 16000
-        path_vocal = os.path.join(path_audio, 'vocal')
-        path_accom = os.path.join(path_audio, 'accom')
-        filename_list = os.path.join(path_h5, "names_valid.txt")
-        
-        names_valid = [x.strip() for x in open(filename_list, "r").readlines()]
-        names_valid.sort()
-        
-        n = len(names_valid)
 
-        sdr_all = []
-        for i in range(n):
-            
-            print "%d of %d" % (i, n)
-            name = names_valid[i]
-            filename_vocal = os.path.join(path_vocal, name + '.wav')
-            filename_accom = os.path.join(path_accom, name + '.wav')
-            wav_vocal, sr = librosa.core.load(filename_vocal, sr=sr)
-            wav_accom, sr = librosa.core.load(filename_accom, sr=sr)
-            wav_gt = np.concatenate((wav_vocal[None, ...], wav_accom[None, ...]), axis=0)
-            
-            filename_est_1 = os.path.join(path_result, name + '_1.wav')
-            filename_est_2 = os.path.join(path_result, name + '_2.wav')
-            wav_est_1, sr = librosa.core.load(filename_est_1, sr=sr)
-            wav_est_2, sr = librosa.core.load(filename_est_2, sr=sr)  
-            wav_est_mix = wav_est_1 + wav_est_2
-            wav_est = np.concatenate((wav_est_1[None, ...], wav_est_2[None, ...]), axis=0)
-            wav_est_mix = np.concatenate((wav_est_mix[None, ...], wav_est_mix[None, ...]), axis=0)
-            
-            sdr, isr, sir, sar, perm = museval.metrics.bss_eval(wav_gt, wav_est, 
-                                                        window=np.Inf, hop=0, 
-                                                        compute_permutation=True)
-            sdr = sdr[ perm.ravel() ].ravel()
-            sdr0, isr0, sir0, sar0, perm0 = museval.metrics.bss_eval(wav_gt, wav_est_mix, 
-                                                                window=np.Inf, hop=0, 
-                                                                compute_permutation=True)
-            sdr0 = sdr0[ perm0.ravel() ].ravel()
-            nsdr = sdr - sdr0
-            sdr_all.append(np.concatenate( (sdr, nsdr) ))
-        
-        sdr_all = np.array(sdr_all)
-        sdr_all_mean = np.mean(sdr_all, axis=0)
-        sdr_all_median = np.median(sdr_all, axis=0)
-        logger.log("-------------------------------------------------")
-        logger.log("SDR(voice)      SDR(accom)      NSDR(voice)     NSDR(accom)")
-        logger.log("%.4f \t\t%.4f \t\t%.4f \t\t%.4f \t\t (mean)" % 
-                   (sdr_all_mean[0], sdr_all_mean[1], sdr_all_mean[2], sdr_all_mean[3]) )
-        logger.log("%.4f \t\t%.4f \t\t%.4f \t\t%.4f \t\t (median)" % 
-                   (sdr_all_median[0], sdr_all_median[1], sdr_all_median[2], sdr_all_median[3]) )
-        logger.log("-------------------------------------------------")
-        
-        sdr_all = np.array(sdr_all)
-        filename_result = os.path.join(path_result, "_SDR.txt")
-        np.savetxt(filename_result, sdr_all, fmt="%.4f")
-
-                
     
 '''
 a dumb logger object when input logger is None
@@ -260,10 +170,10 @@ if __name__ == "__main__":
     
     logger = Logger_dumb()
     t = Tester(logger)
-#    t.load_data()
-#    t.load_model()
-#    t.run()
-    t.eval_sdr()
+    t.load_data()
+    t.load_model()
+    t.run()
+
 
 
 
